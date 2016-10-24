@@ -14,7 +14,9 @@ type Clock struct {
 }
 
 func New(hour, minute int) Clock {
-	//fmt.Println(fmt.Sprintf("testing - %d:%d", hour, minute))
+	if minute == -2980 {
+		fmt.Println("we're in!")
+	}
 	c := Clock{hour, minute}
 
 	if minute >= 60 {
@@ -37,7 +39,6 @@ func New(hour, minute int) Clock {
 
 	if c.H < 0 {
 		tmp := int(math.Abs(float64(c.H)))
-		//fmt.Println(fmt.Sprintf("tmp: %d", tmp))
 		c.H = 24 - (tmp % 24)
 	}
 
@@ -48,8 +49,11 @@ func (c Clock) String() string {
 	return fmt.Sprintf("%02d:%02d", c.H, c.M)
 }
 
-func (c Clock) Add(minutes int) Clock {
-	//c.Hour += math.Floor(minutes / 60)
-	c.M += minutes % 60
+func (c Clock) Add(minute int) Clock {
+	if minute == -3000 {
+		fmt.Println(fmt.Sprintf("clock: %02d:%02d", c.H, c.M))
+	}
+	c = New(c.H, c.M+minute)
+
 	return c
 }
