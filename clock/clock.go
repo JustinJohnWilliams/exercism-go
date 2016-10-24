@@ -13,10 +13,8 @@ type Clock struct {
 	M int
 }
 
+//New is the constructor for a Clock
 func New(hour, minute int) Clock {
-	if minute == -2980 {
-		fmt.Println("we're in!")
-	}
 	c := Clock{hour, minute}
 
 	if minute >= 60 {
@@ -39,7 +37,12 @@ func New(hour, minute int) Clock {
 
 	if c.H < 0 {
 		tmp := int(math.Abs(float64(c.H)))
-		c.H = 24 - (tmp % 24)
+		if tmp%24 != 0 {
+			c.H = 24 - (tmp % 24)
+		} else {
+			//we've gone back x days
+			c.H = 0
+		}
 	}
 
 	return c
@@ -49,11 +52,7 @@ func (c Clock) String() string {
 	return fmt.Sprintf("%02d:%02d", c.H, c.M)
 }
 
+//Add will add minutes to the clock and return the correct time
 func (c Clock) Add(minute int) Clock {
-	if minute == -3000 {
-		fmt.Println(fmt.Sprintf("clock: %02d:%02d", c.H, c.M))
-	}
-	c = New(c.H, c.M+minute)
-
-	return c
+	return New(c.H, c.M+minute)
 }
