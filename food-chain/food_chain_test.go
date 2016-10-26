@@ -79,7 +79,6 @@ func TestVerses(t *testing.T) {
 	if ret, want := Verses(1, 2), ref[1]+"\n\n"+ref[2]; ret != want {
 		t.Fatalf("Verses(1, 2) =\n%s\n  want:\n%s", ret, want)
 	}
-
 }
 
 func TestSong(t *testing.T) {
