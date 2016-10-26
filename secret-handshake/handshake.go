@@ -19,24 +19,19 @@ func Handshake(c uint) []string {
 		return nil
 	}
 
-	var phrase = make([]string, length)
-	i := 0
+	var phrase = []string(nil)
 
 	if length > 0 && string(code[length-1]) == "1" {
-		phrase[i] = wink
-		i++
+		phrase = append(phrase, wink)
 	}
 	if length > 1 && string(code[length-2]) == "1" {
-		phrase[i] = doubleBlink
-		i++
+		phrase = append(phrase, doubleBlink)
 	}
 	if length > 2 && string(code[length-3]) == "1" {
-		phrase[i] = closeEyes
-		i++
+		phrase = append(phrase, closeEyes)
 	}
 	if length > 3 && string(code[length-4]) == "1" {
-		phrase[i] = jump
-		i++
+		phrase = append(phrase, jump)
 	}
 	if length > 4 && string(code[length-5]) == "1" {
 		phrase = reverse(phrase)
